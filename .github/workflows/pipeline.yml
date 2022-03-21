@@ -46,6 +46,7 @@ jobs:
         environment_name: ${{ secrets.EB_ENVIRONMENT }}
         existing_bucket_name: ${{ env.EB_BUCKET }}
         version_label: v1.0
+        wait_for_deployment: false
         region: us-west-2
         use_existing_version_if_available: true
         deployment_package: laravel-v5-rds.zip
