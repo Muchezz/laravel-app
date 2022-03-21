@@ -10,9 +10,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: composer install
+      run: 
+        cd eb1-laravel 
+        composer install
     - name: Run tests
-      run: vendor/bin/phpunit
+      run: 
+        cd eb1-laravel 
+        vendor/bin/phpunit
 
   build:
     runs-on: ubuntu-latest
