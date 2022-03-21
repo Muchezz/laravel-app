@@ -8,13 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+
     - name: Install dependencies
-      run: 
+      run: |
+        # Install dependencies
         cd eb1-laravel 
         composer install
     - name: Run tests
-      run: 
+      run: |
+        # Run tests
         cd eb1-laravel 
         vendor/bin/phpunit
 
