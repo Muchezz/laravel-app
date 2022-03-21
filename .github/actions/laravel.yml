@@ -1,0 +1,39 @@
+
+on:
+  push:
+    branches: [ main ]
+  
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: composer install
+    - name: Run tests
+      run: vendor/bin/phpunit
+
+  build:
+    runs-on: ubuntu-latest
+	depends-on: tests
+    steps:
+
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Generate deployment package
+      run: 
+         cd eb1-laravel
+         zip -r deploy.zip . -x '*.git*'
+
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v20
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: Incentive-app
+        environment_name: Incentive-app-Environment
+        # version_label: 12345
+        region: us-west-2
+        deployment_package: deploy.zip
