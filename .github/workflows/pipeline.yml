@@ -35,7 +35,7 @@ jobs:
     - name: Generate deployment package
       run: |
          cd eb1-laravel
-         zip ../laravel-v5-rds.zip -r * .[^.]* -x "vendor/*"
+         zip ../laravel-v6-rds.zip -r * .[^.]* -x "vendor/*"
         #  zip -r deploy.zip . -x '*.git*'
 
     - name: Deploy to EB
@@ -50,4 +50,4 @@ jobs:
         # wait_for_deployment: false
         region: us-west-2
         use_existing_version_if_available: true
-        deployment_package: laravel-v5-rds.zip
+        deployment_package: laravel-v6-rds.zip
